@@ -1,0 +1,194 @@
+@import url("https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--background: 220 25% 6%;
+		--foreground: 45 30% 90%;
+
+		--card: 220 20% 10%;
+		--card-foreground: 45 30% 90%;
+
+		--popover: 220 20% 12%;
+		--popover-foreground: 45 30% 90%;
+
+		--primary: 45 85% 55%;
+		--primary-foreground: 220 25% 6%;
+
+		--secondary: 145 45% 22%;
+		--secondary-foreground: 45 30% 95%;
+
+		--muted: 220 15% 15%;
+		--muted-foreground: 220 10% 55%;
+
+		--accent: 0 70% 50%;
+		--accent-foreground: 45 30% 95%;
+
+		--destructive: 0 84.2% 60.2%;
+		--destructive-foreground: 210 40% 98%;
+
+		--border: 45 30% 25%;
+		--input: 220 15% 18%;
+		--ring: 45 85% 55%;
+
+		--radius: 0.5rem;
+
+		/* Casino specific colors */
+		--casino-green: 145 50% 25%;
+		--casino-gold: 45 85% 55%;
+		--casino-gold-light: 45 90% 70%;
+		--casino-red: 0 70% 50%;
+		--casino-black: 220 25% 8%;
+		--casino-felt: 145 40% 18%;
+
+		/* Gradients */
+		--gradient-gold: linear-gradient(
+			135deg,
+			hsl(45, 85%, 55%) 0%,
+			hsl(35, 90%, 45%) 50%,
+			hsl(45, 85%, 55%) 100%
+		);
+		--gradient-felt: radial-gradient(
+			ellipse at center,
+			hsl(145, 45%, 22%) 0%,
+			hsl(145, 50%, 15%) 100%
+		);
+		--gradient-dark: linear-gradient(
+			180deg,
+			hsl(220, 25%, 8%) 0%,
+			hsl(220, 30%, 4%) 100%
+		);
+
+		/* Shadows */
+		--shadow-gold: 0 0 30px hsl(45 85% 55% / 0.3);
+		--shadow-glow: 0 0 60px hsl(45 85% 55% / 0.2);
+	}
+
+	.dark {
+		--background: 220 25% 6%;
+		--foreground: 45 30% 90%;
+	}
+}
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+
+	body {
+		@apply bg-background text-foreground;
+		font-family: "Montserrat", sans-serif;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		font-family: "Cinzel", serif;
+	}
+}
+
+@layer utilities {
+	.text-gradient-gold {
+		background: var(--gradient-gold);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+	}
+
+	.bg-gradient-gold {
+		background: var(--gradient-gold);
+	}
+
+	.bg-gradient-felt {
+		background: var(--gradient-felt);
+	}
+
+	.bg-gradient-dark {
+		background: var(--gradient-dark);
+	}
+
+	.shadow-gold {
+		box-shadow: var(--shadow-gold);
+	}
+
+	.shadow-glow {
+		box-shadow: var(--shadow-glow);
+	}
+
+	.border-gold {
+		border-color: hsl(var(--casino-gold));
+	}
+}
+
+/* Roulette wheel animation */
+@keyframes spin-wheel {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+@keyframes spin-slow-down {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(var(--final-rotation));
+	}
+}
+
+@keyframes ball-bounce {
+	0%,
+	100% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-10px);
+	}
+}
+
+@keyframes pulse-gold {
+	0%,
+	100% {
+		box-shadow: 0 0 20px hsl(45 85% 55% / 0.4);
+	}
+	50% {
+		box-shadow: 0 0 40px hsl(45 85% 55% / 0.8);
+	}
+}
+
+@keyframes shimmer {
+	0% {
+		background-position: -200% center;
+	}
+	100% {
+		background-position: 200% center;
+	}
+}
+
+.animate-spin-wheel {
+	animation: spin-wheel 0.1s linear infinite;
+}
+
+.animate-pulse-gold {
+	animation: pulse-gold 2s ease-in-out infinite;
+}
+
+.animate-shimmer {
+	background: linear-gradient(
+		90deg,
+		transparent 0%,
+		hsl(45 85% 55% / 0.3) 50%,
+		transparent 100%
+	);
+	background-size: 200% 100%;
+	animation: shimmer 2s infinite;
+}
